@@ -12,6 +12,7 @@ import com.appdynamics.demo.android.misc.GlobalDataProvider;
 import com.appdynamics.demo.android.misc.PreferenceConstants;
 import com.appdynamics.demo.android.misc.UserPrefActivity;
 
+import com.appdynamics.eumagent.runtime.michiNetworkRequestCallback;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -20,6 +21,8 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+
+import com.appdynamics.eumagent.runtime.Instrumentation;
 
 
 /**
@@ -64,6 +67,12 @@ public class CustomApplication extends Application {
                         .defaultDisplayImageOptions(options) // default
                         .writeDebugLogs().build();
         ImageLoader.getInstance().init(config);
+        // Start the AppDynamics Instrumentation
+Instrumentation.start(AgentConfiguration.builder()
+        .withContext(getApplicationContext())
+        .withAppKey("AD-AAB-AAF-YUE")
+		.withNetworkRequestCallback(new michiNetworkRequestCallback())
+        .build());
     }
 
     public void setGlobalData() {

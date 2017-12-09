@@ -1,12 +1,24 @@
 apply plugin: 'com.android.application'
 apply plugin: 'adeum'
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.appdynamics:appdynamics-gradle-plugin:4.4.0.440'
+    }
+}
+
+repositories {
+    jcenter()
+}
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.3'
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        applicationId "com.appdynamics.demo.android.ECommerce"
+        applicationId 'com.appdynamics.sample.englert'
         minSdkVersion 4
         targetSdkVersion 19
     }
@@ -18,6 +30,7 @@ android {
     }
     productFlavors {
     }
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {
@@ -28,6 +41,7 @@ dependencies {
     //Uncomment to use local file-based adeum-maven-repo (version should be 1.0)
     //compile 'com.appdynamics:appdynamics-runtime:1.0'
     //Uncomment to use GA plugin from jcenter (choose version)
-    compile 'com.appdynamics:appdynamics-runtime:4.2.2.0'
+    //compile 'com.appdynamics:appdynamics-runtime:4.2.2.0'
+    //compile 'com.appdynamics:appdynamics-runtime:4.4.0.440'
     androidTestCompile fileTree(include: ['*.jar'], dir: 'libs')
 }
