@@ -104,6 +104,7 @@ public class LoginActivity extends Activity implements AsyncTaskListener {
 	 */
 	public void attemptLogin() {
 		CallTracker tracker = Instrumentation.beginCall("com.appdynamics.demo.android.LoginActivity", "attemptLogin");
+		Instrumentation.startTimer("LoginToLogout");
 		if (mAuthTask != null) {
 			return;
 		}

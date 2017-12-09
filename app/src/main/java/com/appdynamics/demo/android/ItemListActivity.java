@@ -15,6 +15,7 @@ import com.appdynamics.demo.android.misc.Constants;
 import com.appdynamics.demo.android.misc.UserPrefActivity;
 import com.appdynamics.demo.android.model.Item;
 import com.appdynamics.demo.android.tabs.CustomTabListener;
+import com.appdynamics.eumagent.runtime.Instrumentation;
 
 /**
  * Unfortunately the two pane mode does not work because we are using
@@ -130,6 +131,7 @@ public class ItemListActivity extends FragmentActivity implements
 
         Intent loginIntent = new Intent(this, LoginActivity.class);
         startActivity(loginIntent);
+		Instrumentation.stopTimer("LoginToLogout");
     }
 
 	/**
