@@ -25,6 +25,7 @@ import com.appdynamics.demo.android.misc.GlobalDataProvider;
 import com.appdynamics.demo.android.model.Item;
 import com.appdynamics.demo.android.service.http.DeleteRequestService;
 import com.appdynamics.demo.android.service.http.GetRequestService;
+import com.appdynamics.eumagent.runtime.Instrumentation;
 
 public class CartFragment extends ListFragment {
     private static final String TAG = CartFragment.class.getName();
@@ -122,7 +123,7 @@ public class CartFragment extends ListFragment {
 	{
         // Update list of checked items
         int index = myCheckedItems.indexOfKey(position);
-
+		Instrumentation.reportMetric("Index", index);
         // If item already checked, delete entry; otherwise add it
         if (index >= 0)
             myCheckedItems.delete(position);
