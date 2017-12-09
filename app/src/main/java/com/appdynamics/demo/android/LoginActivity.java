@@ -25,6 +25,7 @@ import com.appdynamics.demo.android.misc.Constants;
 import com.appdynamics.demo.android.misc.GlobalDataProvider;
 import com.appdynamics.demo.android.misc.UserLoginTask;
 import com.appdynamics.demo.android.misc.UserPrefActivity;
+import com.appdynamics.eumagent.runtime.Instrumentation;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -238,7 +239,7 @@ public class LoginActivity extends Activity implements AsyncTaskListener {
 		    editor.putString(Constants.COMMON_PREFS_USERNAME,mUser);
 		    editor.putString(Constants.COMMON_PREFS_PASSWORD,mPassword);
 		    editor.commit();
-
+			Instrumentation.setUserData("User ID", mUser);
 		    finish();
 			navigateToHomePage();
 			return;
