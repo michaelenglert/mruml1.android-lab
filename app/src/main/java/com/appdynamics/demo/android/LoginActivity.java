@@ -25,6 +25,7 @@ import com.appdynamics.demo.android.misc.Constants;
 import com.appdynamics.demo.android.misc.GlobalDataProvider;
 import com.appdynamics.demo.android.misc.UserLoginTask;
 import com.appdynamics.demo.android.misc.UserPrefActivity;
+import com.appdynamics.eumagent.runtime.CallTracker;
 import com.appdynamics.eumagent.runtime.Instrumentation;
 
 /**
@@ -102,6 +103,7 @@ public class LoginActivity extends Activity implements AsyncTaskListener {
 	 * errors are presented and no actual login attempt is made.
 	 */
 	public void attemptLogin() {
+		CallTracker tracker = Instrumentation.beginCall("com.appdynamics.demo.android.LoginActivity", "attemptLogin");
 		if (mAuthTask != null) {
 			return;
 		}
@@ -142,6 +144,7 @@ public class LoginActivity extends Activity implements AsyncTaskListener {
 			mAuthTask = new UserLoginTask(this);
 			mAuthTask.execute(mUser,mPassword);
 		}
+		tracker.reportCallEnded();
 	}
 
 	/**
