@@ -108,6 +108,7 @@ public class LoginActivity extends Activity implements AsyncTaskListener {
 		if (mAuthTask != null) {
 			return;
 		}
+		Instrumentation.leaveBreadcrumb("something");
 
 		// Reset errors.
 		mUserView.setError(null);
