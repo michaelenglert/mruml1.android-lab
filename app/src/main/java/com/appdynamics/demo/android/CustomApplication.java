@@ -24,6 +24,11 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
 import com.appdynamics.eumagent.runtime.Instrumentation;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 
 /**
  * Currently used to initialize the Universal Image Loader which allows some flexibility with the number of threads flag
@@ -67,12 +72,17 @@ public class CustomApplication extends Application {
                         .defaultDisplayImageOptions(options) // default
                         .writeDebugLogs().build();
         ImageLoader.getInstance().init(config);
+
+		String[] excludes = { ".*login.*" };
+		List<String> excludesList = Arrays.asList( excludes );
+		Set<String> excludesListSet = new HashSet<String>( excludesList );
         // Start the AppDynamics Instrumentation
 Instrumentation.start(AgentConfiguration.builder()
         .withContext(getApplicationContext())
         .withAppKey("AD-AAB-AAF-YUE")
 		.withNetworkRequestCallback(new michiNetworkRequestCallback())
-        .build());
+		.withExcludedUrlPatterns(excludesListSet)
+		.build());
     }
 
     public void setGlobalData() {
